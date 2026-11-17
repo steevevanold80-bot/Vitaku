@@ -1,0 +1,13 @@
+import { useNavigate } from 'react-router-dom'
+import { useStore } from '../store'
+import { useT } from '../i18n'
+const TXT = {
+ about: { fr: ['À propos de VITAKU', "VITAKU est une plateforme communautaire dédiée aux anime, aux mangas et à la culture geek, pensée d'abord pour l'Afrique francophone.", "Notre promesse : un seul endroit pour découvrir des œuvres, partager avec d'autres passionnés, progresser (XP, niveaux, grades, badges) et s'affronter dans des duels amicaux.", "Les fiches d'œuvres proviennent d'AniList. VITAKU ne diffuse que des contenus dont l'équipe détient les droits.", 'Contact : contact@vitaku.app (à remplacer par ton adresse)'],
+  en: ['About VITAKU', 'VITAKU is a community platform for anime, manga and geek culture, built first for French-speaking Africa.', 'Our promise: one place to discover series, share with fellow fans, level up (XP, ranks, badges) and compete in friendly duels.', 'Series information comes from AniList. VITAKU only streams content the team has the rights to.', 'Contact: contact@vitaku.app (replace with your address)'] },
+ privacy: { fr: ['Politique de confidentialité', "Données collectées : pseudo, e-mail, mot de passe (chiffré), date de naissance, pays, photo de profil, activité dans l'application (listes, duels, messages).", "Utilisation : faire fonctionner ton compte, ta progression, les classements et la modération. Nous ne vendons pas tes données.", 'Services tiers : AniList (informations sur les œuvres) et Supabase (hébergement des données).', "Tes droits : tu peux modifier tes informations, choisir qui voit ta carte Otaku et demander la suppression de ton compte.", "Les mises en XP sont virtuelles : aucun argent réel n'est engagé.", "Ce texte est un modèle : fais-le relire par un juriste avant la publication."],
+  en: ['Privacy policy', 'Data collected: username, e-mail, password (hashed), birth date, country, profile photo, in-app activity (lists, duels, messages).', 'Use: to run your account, progression, rankings and moderation. We do not sell your data.', 'Third parties: AniList (series information) and Supabase (data hosting).', 'Your rights: edit your information, choose who sees your Otaku card and request account deletion.', 'XP stakes are virtual: no real money is involved.', 'This text is a template: have a lawyer review it before publishing.'] },
+}
+export default function Legal({ mode }) {
+  const nav = useNavigate(), t = useT(), [l] = useStore('uilang', 'fr'), [h, ...p] = TXT[mode][l]
+  return <div className="page glow"><button className="chip" onClick={() => nav(-1)}>‹ {t('Retour')}</button><h1 style={{ margin: '12px 0' }}>{h}</h1>{p.map((x, i) => <p key={i} className="card" style={{ marginBottom: 10 }}>{x}</p>)}</div>
+}
